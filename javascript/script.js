@@ -1,3 +1,4 @@
+console.log("Script loaded successfully!");
 // Wait until the page is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -76,5 +77,28 @@ const images = document.querySelectorAll(".images img");
 images.forEach(img => {
     img.addEventListener("click", () => {
         img.classList.toggle("pop");
+    });
+});
+console.log("EmailJS script loaded successfully!");
+emailjs.init("vHMkOHp9iPN9zUcbb");
+
+const form = document.getElementById("enquiryForm");
+const formMessage = document.getElementById("formMessage");
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm(
+        "service_jfeftg8",
+        "template_6k4js4e",
+        form
+    )
+    .then(() => {
+        formMessage.textContent = "Enquiry submitted successfully!";
+        form.reset();
+    })
+    .catch((error) => {
+        formMessage.textContent = "Failed to send enquiry.";
+        console.error(error);
     });
 });
